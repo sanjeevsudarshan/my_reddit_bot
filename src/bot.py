@@ -16,7 +16,11 @@ def post_replied_to(submissionFile, submission_id):
                 return True
     return False
 
-def run_bot():
+def search_for_posts(subreddit, keyword, period):
+    sort = 'relevance'
+    searchResults = subreddit.search(keyword, sort, time_filter=period)
+    for post in searchResults:
+        print post.url
 
 def post_reply(subreddit, postToReplyTo, replyText):
     submissionFile = 'posts_replied_to.txt'
@@ -34,4 +38,7 @@ if __name__ == '__main__':
     subreddit = reddit.subreddit('')
     postToReplyTo = ""
     replyText = ""
+    keyword = ""
+    period = "year"
     post_reply(subreddit, postToReplyTo, replyText)
+    search_for_posts(subreddit, keyword, period)
