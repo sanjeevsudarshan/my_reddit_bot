@@ -22,6 +22,9 @@ def search_for_posts(subreddit, keyword, period):
             return
 
 def post_replied_to(submissionFile, submission_id):
+    '''
+        Module checks if the bot has already replied to a post
+    '''
     if not os.path.isfile(submissionFile):
         return False
     else:
@@ -31,13 +34,10 @@ def post_replied_to(submissionFile, submission_id):
                 return True
     return False
 
-def search_for_posts(subreddit, keyword, period):
-    sort = 'relevance'
-    searchResults = subreddit.search(keyword, sort, time_filter=period)
-    for post in searchResults:
-        print post.url
-
 def post_reply(subreddit, postToReplyTo, replyText):
+    '''
+        Module sends a reply to a post that contains certain words
+    '''
     submissionFile = 'posts_replied_to.txt'
     for submission in subreddit.hot():
         submissionId = submission.id
@@ -54,6 +54,5 @@ if __name__ == '__main__':
     postToReplyTo = ""
     replyText = ""
     keyword = ""
-    period = "year"
-    post_reply(subreddit, postToReplyTo, replyText)
+    period = ""
     search_for_posts(subreddit, keyword, period)
