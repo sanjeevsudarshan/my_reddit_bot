@@ -6,6 +6,21 @@ import os
 import re
 import praw
 
+def search_for_posts(subreddit, keyword, period):
+    '''
+        Module looks for keywords in posts in a subreddit within a time frame.
+    '''
+    sort = 'comments'
+    important_results = []
+    limit = 5
+    searchResults = subreddit.search(keyword, sort, time_filter=period)
+    for post in searchResults:
+        print post.url
+        important_results.append(post.url)
+        limit = limit - 1
+        if limit <= 0:
+            return
+
 def post_replied_to(submissionFile, submission_id):
     if not os.path.isfile(submissionFile):
         return False
